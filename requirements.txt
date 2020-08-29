@@ -1,0 +1,7 @@
+colorama
+cryptography
+pyAesCrypt
+requests
+base58
+base91
+argparse
