@@ -21,3 +21,4 @@ python3 peace.py
 
 
 
+web => virus32.blog.ir
