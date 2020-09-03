@@ -39,7 +39,7 @@ parser.add_argument('-d', help='Decode', dest='d')
 parser.add_argument('-rng', help='Range For Password Generator', dest='rng' ,type=int)
 parser.add_argument('-t', help='text', dest='text')
 args = parser.parse_args()
-def ppp(g , c , p):
+def encoder_PBKDF2HMAC(g , c , p):
     password = p.encode()
     salt = b'salt_'  
     kdf = PBKDF2HMAC(
@@ -156,10 +156,10 @@ def PBKDF2HMAC1():
                                 ttt = f.read()
                         with open(address2 , 'wb') as f:
                                 if mnu=='1':
-                                        f.write(ppp('e' , ttt.decode('utf-8') , password))
+                                        f.write(encoder_PBKDF2HMAC('e' , ttt.decode('utf-8') , password))
                                 else:
                                         try :
-                                            f.write(ppp('d' , ttt.decode('utf-8') , password))
+                                            f.write(encoder_PBKDF2HMAC('d' , ttt.decode('utf-8') , password))
                                         except cryptography.fernet.InvalidToken:
                                             input("Password In Corrent...")
                                             PBKDF2HMAC1()
@@ -171,7 +171,7 @@ def PBKDF2HMAC1():
         if fite=="1":
             text  = input("Press Enter The Cipher Or Text => ")
             if mnu=="1":
-                text = ppp('e' , text , password).decode()
+                text = encoder_PBKDF2HMAC('e' , text , password).decode()
                 if co == "y" or "yes" or "Y":
                     try:
                         clipboard.copy(text)
@@ -180,7 +180,7 @@ def PBKDF2HMAC1():
                         print("[-] Error in Copy ")
                     input(f"[+] => {text}")
             if mnu=='2':
-                text = ppp('d' , text , password).decode()
+                text = encoder_PBKDF2HMAC('d' , text , password).decode()
                 if co == "n" or "no" or "N":
                     try:
                         clipboard.copy(text)
